@@ -1,10 +1,9 @@
 const undeclaredIdentifiers = require('undeclared-identifiers');
 const through = require('through2');
-const merge = require('xtend');
 const parse = require('acorn-node').parse;
 
 const path = require('path');
-const isAbsolute = path.isAbsolute || require('path-is-absolute');
+const { isAbsolute } = path;
 const processPath = require.resolve('process/browser.js');
 const isbufferPath = require.resolve('is-buffer')
 const combineSourceMap = require('@makeomatic/combine-source-map');
@@ -73,7 +72,7 @@ module.exports = function (file, opts) {
     if (!opts) opts = {};
 
     const basedir = opts.basedir || '/';
-    const vars = merge(defaultVars, opts.vars);
+    const vars = Object.assign({}, defaultVars, opts.vars);
     const varNames = Object.keys(vars).filter(function(name) {
         return typeof vars[name] === 'function';
     });
