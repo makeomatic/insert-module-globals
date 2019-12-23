@@ -15,7 +15,8 @@ test('immediate', function (t) {
         var c = {
             setTimeout: setTimeout,
             clearTimeout: clearTimeout,
-            T: t
+            T: t,
+            console: console,
         };
         t.ok(/require\("timers"\)/.test(src), 'timers required in source');
         t.notOk(/require\("\//.test(src), 'absolute path not required in source');
